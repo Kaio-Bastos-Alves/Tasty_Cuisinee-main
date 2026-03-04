@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  color: #333;
+}
+
+nav {
+  display: flex;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.menu li a:hover {
+  color: #bda44c;
+}
+
+.menu li a.active {
+  color: #bda44c;
+}
+
+main {
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 120px !important;
+}
+
+/* Seção Chefes */
+.chefes-intro h2 {
+  font-size: 2.2rem;
+  color: #bda44c;
+  margin-bottom: 10px;
+}
+
+.chefes-intro p {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1rem;
+  color: #8c6420;
+}
+
+.chefes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  gap: 40px;
+}
+
+.indique-chefe-form {
+  width: 300px;
+  text-align: center;
+  background: #bda44c;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.indique-chefe-form h3 {
+  color: #8c6420;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.indique-chefe-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.indique-chefe-form input,
+.indique-chefe-form button {
+  padding: 0.9rem;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  font-size: 1rem;
+}
+
+.indique-chefe-form input {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.indique-chefe-form button {
+  background: #8c6420;
+  color: #ffffff;
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.indique-chefe-form button:hover {
+  background: #ca9a47;
+  color: #fff;
+}
+
+.chefes-lista {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .chefes-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .indique-chefe-form {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+  }
+}
+
+.chefe-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 260px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.chefe-card:hover {
+  transform: translateY(-5px);
+}
+
+.chefe-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.chefe-card h3 {
+  color: #8c6420;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.chefe-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.chefe-card button {
+  background: #8c6420;
+  color: #f0e49a;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Seção Restaurantes */
+.restaurantes-intro {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.restaurantes-intro h2 {
+  font-size: 2.2rem;
+  color: #bda44c;
+  margin-bottom: 10px;
+}
+
+.restaurantes-intro p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #8c6420;
+}
+
+.restaurantes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  gap: 40px;
+}
+
+.restaurantes-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .restaurantes-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .indique-restaurante-form {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+  }
+}
+
+.restaurante-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  width: 270px;
+}
+
+.restaurante-card:hover {
+  transform: scale(1.03);
+}
+
+.restaurante-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.restaurante-card h2 {
+  color: #bda44c;
+  margin: 10px 0 8px;
+}
+
+.restaurante-card p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+.restaurante-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: white;
+  background: #bda44c;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.restaurante-card a:hover {
+  background: #bda44c;
+  color: #fff;
+}
+
+.indique-restaurante-form {
+  width: 300px;
+  text-align: center;
+  padding: 1.5rem;
+  background: #bda44c;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.indique-restaurante-form h3 {
+  color: #8c6420;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.indique-restaurante-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.indique-restaurante-form input,
+.indique-restaurante-form button {
+  padding: 0.9rem;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  font-size: 1rem;
+}
+
+.indique-restaurante-form input {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.indique-restaurante-form button {
+  background: #8c6420;
+  color: #ffffff;
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.indique-restaurante-form button:hover {
+  background: #cc9f50;
+  color: #fff;
+}
+
+footer {
+  background: #bda44c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 40px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+footer h3 {
+  color: #bda44c;
+}
+
+.footer-links a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #555;
+}
+
+.footer-social i {
+  margin-left: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}

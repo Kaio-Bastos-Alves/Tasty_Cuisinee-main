@@ -1,0 +1,93 @@
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+
+
+.menu li a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.menu li a:hover {
+  color: rgb(216, 113, 65);
+}
+
+.menu li a.active {
+  color: rgb(216, 113, 65);
+}
+
+main {
+  flex: 1;
+  max-width: 700px;
+  margin-top: 120px;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #ffc787;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+input[type="text"],
+textarea,
+select,
+input[type="file"] {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  color: #333;
+  font-size: 14px;
+  resize: vertical;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+input[type="file"] {
+  background-color: #FFFFFF;
+}
+
+button {
+  margin-top: 10px;
+  background-color: rgb(216, 113, 65);
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #ffac4d;
+}

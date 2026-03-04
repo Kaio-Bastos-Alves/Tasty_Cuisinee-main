@@ -1,0 +1,13 @@
+package com.tastycuisine.TastyCuisineV2.model.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tastycuisine.TastyCuisineV2.model.entity.Usuario;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+
+}

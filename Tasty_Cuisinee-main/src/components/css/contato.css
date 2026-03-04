@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+main{
+  width: 100%;
+  height: 100vh;
+}
+.contato-container {
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 120px auto 0;
+  text-align: center;
+}
+
+.contato-titulo {
+  font-size: 2.5rem;
+  color: #8C6420;
+  margin-bottom: 20px;
+}
+
+.contato-subtitulo {
+  font-size: 1.1rem;
+  color: #F0E49A;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.formulario-contato {
+  background: #FFFFFF;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.formulario-contato label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8C6420;
+  font-size: 1rem;
+}
+
+.input-wrapper:has(textarea) .input-icon {
+  top: 20px;
+  transform: none;
+}
+
+.formulario-contato input,
+.formulario-contato textarea {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: 2px solid #8C6420;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #FAFAFA;
+  transition: all 0.3s ease;
+}
+
+.formulario-contato input:focus,
+.formulario-contato textarea:focus {
+  outline: none;
+  border-color: #8C6420;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(216, 113, 65, 0.1);
+}
+
+.formulario-contato textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.formulario-contato button {
+  width: 100%;
+  padding: 15px;
+  background: #8C6420;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.formulario-contato button:hover {
+  background: #d6a043;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(216, 113, 65, 0.3);
+}
+
+@media (max-width: 768px) {
+  .contato-container {
+    padding: 20px 15px;
+  }
+  
+  .contato-titulo {
+    font-size: 2rem;
+  }
+  
+  .formulario-contato {
+    padding: 20px;
+  }
+}

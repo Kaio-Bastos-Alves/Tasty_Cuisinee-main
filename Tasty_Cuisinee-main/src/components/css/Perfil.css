@@ -1,0 +1,222 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fredoka", sans-serif;
+}
+
+/* Container principal */
+main .conteudo-perfil {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 40px;
+  min-width: 1000px;
+  max-height: 1024px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 100px;
+}
+
+/* Card do perfil (lateral esquerda) */
+.perfil-card {
+  width: 280px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  position: absolute;
+  left: 80px;
+  margin-top: 200px;
+}
+
+.foto-perfil {
+  width: 100px;
+  height: 100px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+.email {
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* Tags do perfil */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.tag {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.tag.verde {
+  background: #ffc787;
+  color: #333;
+}
+
+/* Barra de progresso */
+.progresso {
+  margin: 15px 0;
+}
+
+.barra {
+  background: #eee;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.preenchida {
+  background: #8c6420;
+  width: 75%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* Conteúdo do perfil (lado direito) */
+.conteudo-perfil {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 40px;
+  min-width: 1000px;
+  max-height: 1024px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Seções internas */
+.conteudo {
+  display: none;
+  width: 100%;
+}
+
+.conteudo.ativa {
+  display: block;
+}
+
+/* Títulos das seções */
+.conteudo h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #8c6420;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 5px;
+}
+
+/* Blocos de campos */
+.campo-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.campo-bloco label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.conteudo input,
+.conteudo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.conteudo input:focus,
+.conteudo select:focus {
+  outline: none;
+  border-color: #8c6420;
+}
+input {
+  border: 2px solid rgb(0, 0, 0) !important;
+}
+
+/* Botão principal */
+.btn-roxo {
+  background: #8c6420;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-roxo:hover {
+  background: rgb(255, 144, 92);
+}
+
+/* Abas */
+.abas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.aba {
+  flex: 1;
+  border: none;
+  background: #f1f1f1;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+}
+
+.aba.ativa {
+  background: #8c6420;
+  color: #fff;
+}
+
+.aba:hover {
+  background: #dcdcdc;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  main.perfil-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .perfil-card,
+  .conteudo-perfil {
+    width: 90%;
+  }
+
+  .abas {
+    flex-direction: column;
+  }
+
+  .aba {
+    flex: 1;
+  }
+}
