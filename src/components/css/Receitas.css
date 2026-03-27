@@ -93,8 +93,8 @@ body {
 
 /* ================= CARD DE RECEITA ================= */
 .card-receita {
-  background: #F0E49A;
-  border: 1px solid #f2e9b5;
+  background: #ebc68e;
+  border: 1px solid #fac664;
   border-radius: 14px;
   overflow: hidden;
   display: flex;
@@ -148,7 +148,7 @@ body {
 
 .card-title {
   font-size: 1rem;
-  color: #2f2a16;
+  color: #422703;
   font-weight: 600;
   margin-top: 0.15rem;
 }
@@ -156,28 +156,38 @@ body {
 /* ================= INFORMAÇÕES E AÇÕES ================= */
 .info-receita {
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: space-between;
-  gap: 0.5rem;
-  color: #8c6420 !important;
-  font-size: 0.86rem;
+  width: 100%;
+  padding: 0 5px; /* Pequeno respiro nas laterais */
 }
 
 .meta {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+  white-space: nowrap; /* Impede que o texto quebre em telas pequenas */
 }
 
 .favoritar {
   background: transparent;
   border: none;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+  display: flex;       /* Mudado para flex */
+  align-items: center; /* Alinha o coração e o número verticalmente */
+  gap: 4px;
   color: #b8860b;
-  padding: 0.15rem;
+  padding: 0;          /* Remove padding que pode estar empurrando o botão */
+  margin: 0;
+  line-height: 1;      /* Evita que o texto herde alturas estranhas */
+}
+.favoritar:hover {
+  background: rgba(184, 134, 11, 0.1); /* Feedback visual ao passar o mouse */
+}
+
+.favoritar svg {
+  display: block;
+  margin: 0;
 }
 
 .likes-count {

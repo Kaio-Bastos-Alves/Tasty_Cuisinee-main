@@ -13,14 +13,13 @@ export interface Recipe {
   description: string
   servings: number
   calories: number
-}
-
+} 
 export var MOCK_RECIPES: Recipe[] = [
   {
     id: 2,
     title: 'Overnight Oats de Morango',
     category: 'Café da Manhã',
-    time: '5 min (+noite)',
+    time: '5 min',
     difficulty: 'Fácil',
     likes: 162,
     image: 'https://images.unsplash.com/photo-1517673408680-ac1e3c67cf8d?auto=format&fit=crop&w=1350&q=80',
@@ -638,7 +637,7 @@ export var MOCK_RECIPES: Recipe[] = [
     id: 27,
     title: 'Pudim de Chia com Cacau',
     category: 'Sobremesas Saudáveis',
-    time: '15 min (+noite)',
+    time: '15 min ()',
     difficulty: 'Fácil',
     likes: 110,
     image: 'https://images.unsplash.com/photo-1514516870926-20598973e480?auto=format&fit=crop&w=1350&q=80',

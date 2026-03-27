@@ -17,7 +17,7 @@
 .Page {
   text-align: center;
   padding: 75px 20px;
-  background-color: #BDA44C;
+  background-color: #ebc68e;
   width: 100%;
   box-sizing: border-box;
   margin-top: 700px;
@@ -25,19 +25,19 @@
 
 .Page h1 {
   font-weight: 700;
-  color: #8C6420;
+  color: #6d4005;
   word-wrap: break-word;
 }
 
 .Page h2 {
-  color: #8C6420;
+  color: #6d4005;
   word-wrap: break-word;
 }
 
 .Page h3 {
   padding-top: 15px;
   font-size: 20px;
-  color: #F0E49A;
+  color: #d66f1b;
   word-wrap: break-word;
   max-width: 100%;
 }
@@ -56,7 +56,7 @@ main h3 {
 }
 
 .buttons button {
-  background-color: #8C6420;
+  background-color: #bd7e43;
   border: none;
   padding: 15px 20px;
   border-radius: 10px;
@@ -67,7 +67,7 @@ main h3 {
 }
 
 .buttons button:hover {
-  background-color: #9c6f26;
+  background-color: #6d4005;
 }
 
 @media (max-width: 768px) {

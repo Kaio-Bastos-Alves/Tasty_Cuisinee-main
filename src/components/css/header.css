@@ -4,7 +4,7 @@ header {
   gap: 20px;
   align-items: center;
   padding: 20px 40px;
-  background: #0a2540 !important;
+  background: #ebc68e !important;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -16,7 +16,7 @@ header {
 }
 
 .Title {
-  color: #f0e49a;
+  color: #6d4005;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
@@ -31,7 +31,7 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color:  #F0E49A !important;
+  color:  #6d4005 !important;
   font-weight: bold;
 }
 

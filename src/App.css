@@ -9,7 +9,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: linear-gradient(360deg, #585876 0%, #0c0c0c 100%) !important;
+  background: #ffffff !important;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -20,7 +20,7 @@ html {
 }
 
 .Title {
-  color: rgb(216, 113, 65);
+  color: #6d4005;
   font-family: Georgia, "Times New Roman", Times, serif;
   display: inline;
 }
