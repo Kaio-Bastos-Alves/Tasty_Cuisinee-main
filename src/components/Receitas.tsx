@@ -1,17 +1,20 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MOCK_RECIPES } from './data/recipes'
+import { receitasAPI, acessosAPI } from '../lib/api'
 import './css/Receitas.css'
 import Header from './header'
 
 type Recipe = {
-  id: number
-  title: string
-  image: string
-  category: string
-  time: string
-  difficulty: string
-  likes: number
+  codReceitas: number
+  nomeReceita: string
+  descricao: string
+  manual2: string
+  fotoReceita?: string
+  chefe?: {
+    codChefe: number
+    nomeUsuario: string
+    nomeCompleto: string
+  }
 }
 
 const CATEGORIES: string[] = [
@@ -41,14 +44,79 @@ export default function Receitas() {
   const navigate = useNavigate()
   const [busca, setBusca] = useState<string>('')
   const [categoria, setCategoria] = useState<string>('Todos')
+  const [receitas, setReceitas] = useState<Recipe[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Carregar receitas do back-end
+  useEffect(() => {
+    const loadReceitas = async () => {
+      try {
+        setLoading(true)
+        const response = await receitasAPI.getAll()
+        if (response.data) {
+          setReceitas(response.data as Recipe[])
+          setError(null)
+        } else {
+          setError(response.error || 'Erro ao carregar receitas')
+        }
+      } catch (err) {
+        setError('Erro ao conectar com o servidor')
+        console.error('Erro ao carregar receitas:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadReceitas()
+  }, [])
 
   const receitasFiltradas = useMemo(() => {
-    return MOCK_RECIPES.filter((r: Recipe) => {
-      const matchCategoria = categoria === 'Todos' || r.category === categoria
-      const matchBusca = r.title.toLowerCase().includes(busca.trim().toLowerCase())
+    return receitas.filter((r: Recipe) => {
+      const matchCategoria = categoria === 'Todos' || r.descricao.toLowerCase().includes(categoria.toLowerCase())
+      const matchBusca = r.nomeReceita.toLowerCase().includes(busca.trim().toLowerCase())
       return matchCategoria && matchBusca
     })
-  }, [busca, categoria])
+  }, [busca, categoria, receitas])
+
+  const handleReceitaClick = async (receitaId: number) => {
+    try {
+      // Registrar acesso quando a receita é clicada
+      const usuarioId = localStorage.getItem('userId') || '1'
+      await acessosAPI.create({
+        codReceita: receitaId,
+        codUsuario: usuarioId,
+        dataAcesso: new Date().toISOString()
+      })
+    } catch (err) {
+      console.error('Erro ao registrar acesso:', err)
+    }
+    
+    navigate(`/receitas/${receitaId}`)
+  }
+
+  if (loading) {
+    return (
+      <main className="receitas-main">
+        <Header />
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <p>Carregando receitas...</p>
+        </div>
+      </main>
+    )
+  }
+
+  if (error) {
+    return (
+      <main className="receitas-main">
+        <Header />
+        <div style={{ textAlign: 'center', padding: '2rem', color: 'red' }}>
+          <p>Erro: {error}</p>
+          <p>Verifique se o servidor está rodando em http://localhost:8080</p>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="receitas-main">
@@ -87,30 +155,32 @@ export default function Receitas() {
 
       <section className="grid-receitas">
         {receitasFiltradas.map((r: Recipe) => (
-          <article key={r.id} className="card-receita">
+          <article key={r.codReceitas} className="card-receita">
             <div className="imagem-receita">
-              <img src={r.image} alt={r.title} />
+              <img 
+                src={r.fotoReceita || 'https://via.placeholder.com/300x200?text=Receita'} 
+                alt={r.nomeReceita} 
+              />
             </div>
 
             <div className="card-body">
-              <span className={`tag ${getCategoryClass(r.category)}`}>{r.category}</span>
-              <h3 className="card-title">{r.title}</h3>
+              <span className={`tag ${getCategoryClass(r.descricao)}`}>{r.descricao}</span>
+              <h3 className="card-title">{r.nomeReceita}</h3>
 
               <div className="info-receita">
-                <span className="meta">🕒 {r.time}</span>
-                <span className="meta">⚙ {r.difficulty}</span>
+                <span className="meta">👨‍🍳 {r.chefe?.nomeUsuario || 'Chef'}</span>
                 <button className="favoritar" aria-label="Favoritar">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
                     <path d="M8 1.3c1.7-3.6 9.3 2.9 0 13.4C-1.3 3.2 6.3-2.3 8 1.3z" />
                   </svg>
-                  <span className="likes-count">{r.likes}</span>
+                  <span className="likes-count">0</span>
                 </button>
               </div>
 
               <div className="card-actions">
                 <button
                   className="ver-receita"
-                  onClick={() => navigate(`/receitas/${r.id}`)}
+                  onClick={() => handleReceitaClick(r.codReceitas)}
                   type="button"
                 >
                   Ver Receita
@@ -124,6 +194,26 @@ export default function Receitas() {
           <p className="nenhuma">Nenhuma receita encontrada com os filtros atuais.</p>
         )}
       </section>
+
+      {/* Botão para cadastrar receita (somente chefes) */}
+      {localStorage.getItem('userType') === 'chefe' && (
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <button
+            onClick={() => navigate('/cadastro-receita')}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#8B5A8F',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+          >
+            + Cadastrar Nova Receita
+          </button>
+        </div>
+      )}
     </main>
   )
 }

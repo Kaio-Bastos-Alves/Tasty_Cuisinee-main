@@ -19,6 +19,8 @@ import Sobre from './components/Sobre.tsx'
 import VCdastro from './components/Cadastronew.tsx'
 import LoginNew from './components/LoginNew.tsx'
 import ADM from './components/ADM.tsx'
+import CadastroChefe from './components/CadastroChefe.tsx'
+import CadastroReceita from './components/CadastroReceita.tsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/> },
@@ -37,11 +39,13 @@ const router = createBrowserRouter([
   { path: '/loginnew', element: <LoginNew/> },
   { path: '/sobre', element: <Sobre/> },
   { path: "/ADM", element: <ADM/> },
+  { path: '/cadastro-chefe', element: <CadastroChefe/> },
+  { path: '/cadastro-receita', element: <CadastroReceita/> },
   { path: '*', element: <div style={{textAlign: 'center', padding: '2rem'}}><h2>Página não encontrada</h2><a href="/">Voltar ao início</a></div> }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} fallbackElement={<div>Carregando...</div>}/>
+    <RouterProvider router={router} />
   </StrictMode>
 )
