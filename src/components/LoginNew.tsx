@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { usuariosAPI, chefesAPI } from '../lib/api';
+import { authService } from '../lib/authService';
 import './css/Login.css';
 
 export default function LoginNew() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    nome_de_usuario: '',
+    nomeDeUsuario: '',
     senha: ''
   });
   const [userType, setUserType] = useState<'usuario' | 'chefe'>('usuario');
@@ -17,55 +17,40 @@ export default function LoginNew() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
+      let result;
+
       if (userType === 'usuario') {
-        // Login de usuário comum
-        const response = await usuariosAPI.getAll();
-        if (response.data) {
-          const usuarios = response.data as any[];
-          const user = usuarios.find((u: any) => 
-            u.nome_de_usuario === formData.nome_de_usuario && u.senha === formData.senha
-          );
-
-          if (user) {
-            localStorage.setItem('isLogged', 'true');
-            localStorage.setItem('userId', user.cod_user || user.codUser);
-            localStorage.setItem('userType', 'usuario');
-            localStorage.setItem('userName', user.nome_de_usuario);
-            localStorage.setItem('userEmail', user.gmail);
-            navigate('/home');
-          } else {
-            setError('Usuário ou senha incorretos');
-          }
-        } else {
-          setError('Erro ao conectar com o servidor');
-        }
+        result = await authService.loginUsuario(
+          formData.nomeDeUsuario,
+          formData.senha
+        );
       } else {
-        // Login de chef
-        const response = await chefesAPI.getAll();
-        if (response.data) {
-          const chefes = response.data as any[];
-          const chef = chefes.find((c: any) => 
-            c.nome_de_usuario === formData.nome_de_usuario && c.senha === formData.senha
-          );
+        result = await authService.loginChefe(
+          formData.nomeDeUsuario,
+          formData.senha
+        );
+      }
 
-          if (chef) {
-            localStorage.setItem('isLogged', 'true');
-            localStorage.setItem('userId', chef.cod_chefe || chef.codChefe);
-            localStorage.setItem('userType', 'chefe');
-            localStorage.setItem('userName', chef.nome_de_usuario);
-            localStorage.setItem('userEmail', chef.gmail);
-            navigate('/home');
-          } else {
-            setError('Chef ou senha incorretos');
-          }
-        } else {
-          setError('Erro ao conectar com o servidor');
-        }
+      if (result.success && result.user) {
+        // Salvar no localStorage
+        localStorage.setItem('isLogged', 'true');
+        localStorage.setItem('userId', String(result.user.id));
+        localStorage.setItem('userType', result.user.tipo);
+        localStorage.setItem('userName', result.user.nome);
+        localStorage.setItem('userEmail', result.user.email);
+
+        console.log('Login bem-sucedido:', result.user);
+        navigate('/home');
+      } else {
+        setError(result.error || 'Erro ao fazer login');
       }
     } catch (error) {
-      setError('Erro ao fazer login: ' + (error instanceof Error ? error.message : 'Desconhecido'));
+      setError(
+        'Erro ao fazer login: ' +
+        (error instanceof Error ? error.message : 'Desconhecido')
+      );
       console.error('Erro ao fazer login:', error);
     } finally {
       setLoading(false);
@@ -82,9 +67,13 @@ export default function LoginNew() {
   return (
     <div className="form-container">
       <p className="title">Login</p>
-      
-      {error && <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
-      
+
+      {error && (
+        <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
+          {error}
+        </div>
+      )}
+
       <form className="form" onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="userType">Tipo de Conta</label>
@@ -92,7 +81,12 @@ export default function LoginNew() {
             id="userType"
             value={userType}
             onChange={(e) => setUserType(e.target.value as 'usuario' | 'chefe')}
-            style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+            style={{
+              padding: '8px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              width: '100%'
+            }}
           >
             <option value="usuario">Usuário Comum</option>
             <option value="chefe">Chef de Cozinha</option>
@@ -100,12 +94,12 @@ export default function LoginNew() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="nome_de_usuario">Nome de Usuário</label>
+          <label htmlFor="nomeDeUsuario">Nome de Usuário</label>
           <input
             type="text"
-            name="nome_de_usuario"
-            id="nome_de_usuario"
-            value={formData.nome_de_usuario}
+            name="nomeDeUsuario"
+            id="nomeDeUsuario"
+            value={formData.nomeDeUsuario}
             onChange={handleChange}
             required
             disabled={loading}
@@ -136,13 +130,35 @@ export default function LoginNew() {
           <>
             <a href="/cadastronew"> Cadastre-se</a>
             <br />
-            <small>É chef? <a href="/login-chefe">Clique aqui</a></small>
+            <small>
+              É chef?{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setUserType('chefe');
+                }}
+              >
+                Clique aqui
+              </a>
+            </small>
           </>
         ) : (
           <>
             <a href="/cadastro-chefe"> Cadastre-se como Chef</a>
             <br />
-            <small>É usuário comum? <a href="/loginnew">Clique aqui</a></small>
+            <small>
+              É usuário comum?{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setUserType('usuario');
+                }}
+              >
+                Clique aqui
+              </a>
+            </small>
           </>
         )}
       </p>
