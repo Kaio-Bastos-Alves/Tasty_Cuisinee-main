@@ -37,17 +37,21 @@ export default function CadastroReceita() {
     setLoading(true);
     setError(null);
 
-    try {
-      const chefeId = localStorage.getItem('userId');
-      const payload = {
-        nomeReceita: formData.nomeReceita,
-        descricao: formData.descricao,
-        manual2: formData.manual2,
-        codChefe: chefeId
-      };
+      try {
+        const chefeId = localStorage.getItem('userId');
+        
+        // ✅ Enviar como objeto Chefe, não como codChefe
+        const payload = {
+          nomeReceita: formData.nomeReceita,
+          descricao: formData.descricao,
+          manual2: formData.manual2,
+          chefe: {
+            codChefe: parseInt(chefeId || '0')
+          }
+        };
 
-      const response = await receitasAPI.create(payload);
-
+        const response = await receitasAPI.create(payload);
+        
       if (response.status === 200 || response.status === 201) {
         alert('Receita cadastrada com sucesso!');
         navigate('/receitas');
