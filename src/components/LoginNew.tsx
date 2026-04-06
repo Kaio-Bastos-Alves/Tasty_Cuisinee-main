@@ -6,7 +6,7 @@ import './css/Login.css';
 export default function LoginNew() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    nome_usuario: '',
+    nome_de_usuario: '',
     senha: ''
   });
   const [userType, setUserType] = useState<'usuario' | 'chefe'>('usuario');
@@ -25,14 +25,14 @@ export default function LoginNew() {
         if (response.data) {
           const usuarios = response.data as any[];
           const user = usuarios.find((u: any) => 
-            u.nome_usuario === formData.nome_usuario && u.senha === formData.senha
+            u.nome_de_usuario === formData.nome_de_usuario && u.senha === formData.senha
           );
 
           if (user) {
             localStorage.setItem('isLogged', 'true');
             localStorage.setItem('userId', user.cod_user || user.codUser);
             localStorage.setItem('userType', 'usuario');
-            localStorage.setItem('userName', user.nome_usuario);
+            localStorage.setItem('userName', user.nome_de_usuario);
             localStorage.setItem('userEmail', user.gmail);
             navigate('/home');
           } else {
@@ -47,14 +47,14 @@ export default function LoginNew() {
         if (response.data) {
           const chefes = response.data as any[];
           const chef = chefes.find((c: any) => 
-            c.nome_usuario === formData.nome_usuario && c.senha === formData.senha
+            c.nome_de_usuario === formData.nome_de_usuario && c.senha === formData.senha
           );
 
           if (chef) {
             localStorage.setItem('isLogged', 'true');
             localStorage.setItem('userId', chef.cod_chefe || chef.codChefe);
             localStorage.setItem('userType', 'chefe');
-            localStorage.setItem('userName', chef.nome_usuario);
+            localStorage.setItem('userName', chef.nome_de_usuario);
             localStorage.setItem('userEmail', chef.gmail);
             navigate('/home');
           } else {
@@ -100,12 +100,12 @@ export default function LoginNew() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="nome_usuario">Nome de Usuário</label>
+          <label htmlFor="nome_de_usuario">Nome de Usuário</label>
           <input
             type="text"
-            name="nome_usuario"
-            id="nome_usuario"
-            value={formData.nome_usuario}
+            name="nome_de_usuario"
+            id="nome_de_usuario"
+            value={formData.nome_de_usuario}
             onChange={handleChange}
             required
             disabled={loading}
